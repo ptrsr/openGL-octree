@@ -1,0 +1,5 @@
+StartPlane y rotation - 180
+LevelPlane y rotation - 180
+LevelPlane x rotation from 45 to -45
+createText obj name to correct one
+creditsText obj name to correct one

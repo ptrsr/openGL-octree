@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="MGE Source files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="MGE Source files\mge">
+      <UniqueIdentifier>{5808a1e3-17c6-41a4-bf66-b872468a8c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\behaviours">
+      <UniqueIdentifier>{62606aaf-8ae3-4195-9a83-22a2c9d20af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\core">
+      <UniqueIdentifier>{4394d90a-ffa0-485d-98ea-1e91842edda6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\materials">
+      <UniqueIdentifier>{88a48024-4c44-40c0-a658-f27957d6b003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\util">
+      <UniqueIdentifier>{7d824c34-4bb6-43a4-a48a-0d68b7aad6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\behaviours\Light">
+      <UniqueIdentifier>{6191f85b-fb95-4d9e-9b7b-3bb2e5997a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\auxiliary">
+      <UniqueIdentifier>{43f710dd-1c7a-42d7-9f53-f4b018bdc5db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{30840a28-d8dc-4611-8dc3-f6eba2561fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\shaders">
+      <UniqueIdentifier>{af195ac6-8395-4446-98c0-d54117a3071b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\rendering">
+      <UniqueIdentifier>{b4b177c2-9f52-476b-ba8c-353aabba6279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\scenes">
+      <UniqueIdentifier>{8aa887e6-27d6-4d6c-b038-d0dc77e59c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MGE Source files\mge\auxiliary\octree">
+      <UniqueIdentifier>{5fe9a7ff-c355-4f80-8a78-cfde0766d69e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\glm.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\AbstractGame.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\AbstractMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Camera.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\ColorMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\util\DebugHud.hpp">
+      <Filter>MGE Source files\mge\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\GameObject.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\KeysBehaviour.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\LookAt.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Mesh.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Renderer.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\ShaderProgram.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Texture.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\World.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\RotatingBehaviour.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\TextureMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\config.hpp">
+      <Filter>MGE Source files\mge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\OrbitBehaviour.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\WobbleMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\AbstractLight.hpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\DirectionalLight.hpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\PointLight.hpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\SpotLight.hpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\LitMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\auxiliary\Hex.hpp">
+      <Filter>MGE Source files\mge\auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Message.hpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\util\InputHandler.h">
+      <Filter>MGE Source files\mge\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\CameraBehaviour.hpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Bloom.hpp">
+      <Filter>MGE Source files\mge\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\SkyMaterial.hpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Skybox.hpp">
+      <Filter>MGE Source files\mge\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\scenes\OctreeScene.hpp">
+      <Filter>MGE Source files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\auxiliary\octree\OcNode.hpp">
+      <Filter>MGE Source files\mge\auxiliary\octree</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>MGE Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\AbstractBehaviour.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\AbstractGame.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\AbstractMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Camera.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\ColorMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\util\DebugHud.cpp">
+      <Filter>MGE Source files\mge\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\GameObject.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\KeysBehaviour.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\LookAt.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Mesh.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Renderer.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\ShaderProgram.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Texture.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\World.cpp">
+      <Filter>MGE Source files\mge\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\RotatingBehaviour.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\TextureMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\OrbitBehaviour.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\WobbleMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\DirectionalLight.cpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\PointLight.cpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\AbstractLight.cpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\SpotLight.cpp">
+      <Filter>MGE Source files\mge\behaviours\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\LitMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\util\InputHandler.cpp">
+      <Filter>MGE Source files\mge\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\behaviours\CameraBehaviour.cpp">
+      <Filter>MGE Source files\mge\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Bloom.cpp">
+      <Filter>MGE Source files\mge\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\core\Skybox.cpp">
+      <Filter>MGE Source files\mge\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\materials\SkyMaterial.cpp">
+      <Filter>MGE Source files\mge\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scenes\OctreeScene.cpp">
+      <Filter>MGE Source files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\auxiliary\octree\OcNode.cpp">
+      <Filter>MGE Source files\mge\auxiliary\octree</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\mge\shaders\color.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\color.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litFragment.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litFragment.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litVertex.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litVertex.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\terrain.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\terrain.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\texture.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\texture.fs.temp">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\texture.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\wobble.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\skybox.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\skybox.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litTexture.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litTexture.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litColorChange.fs">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\mge\shaders\litColorChange.vs">
+      <Filter>assets\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
