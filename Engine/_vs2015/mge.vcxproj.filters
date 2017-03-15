@@ -145,6 +145,9 @@
     <ClInclude Include="..\src\mge\auxiliary\octree\OcNode.hpp">
       <Filter>MGE Source files\mge\auxiliary\octree</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\mge\auxiliary\octree\Ball.hpp">
+      <Filter>MGE Source files\mge\auxiliary\octree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -238,6 +241,9 @@
       <Filter>MGE Source files\scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\src\mge\auxiliary\octree\OcNode.cpp">
+      <Filter>MGE Source files\mge\auxiliary\octree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\auxiliary\octree\Ball.cpp">
       <Filter>MGE Source files\mge\auxiliary\octree</Filter>
     </ClCompile>
   </ItemGroup>

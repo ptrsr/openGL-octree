@@ -42,7 +42,7 @@ void OctreeScene::_initializeScene()
     _world->add(camera);
     _world->setMainCamera(camera);
 
-	_ocNode = new OcNode();
+	_ocNode = new OcNode(NULL);
 
 	GameObject* empty = new GameObject("empty");
 	//empty->setBehaviour(new DirectionalLight());

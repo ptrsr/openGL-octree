@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\glm.hpp" />
     <ClInclude Include="..\src\mge\auxiliary\Hex.hpp" />
+    <ClInclude Include="..\src\mge\auxiliary\octree\Ball.hpp" />
     <ClInclude Include="..\src\mge\auxiliary\octree\OcNode.hpp" />
     <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp" />
     <ClInclude Include="..\src\mge\behaviours\AbstractLight.hpp" />
@@ -203,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\mge\auxiliary\octree\Ball.cpp" />
     <ClCompile Include="..\src\mge\auxiliary\octree\OcNode.cpp" />
     <ClCompile Include="..\src\mge\behaviours\AbstractBehaviour.cpp" />
     <ClCompile Include="..\src\mge\behaviours\AbstractLight.cpp" />

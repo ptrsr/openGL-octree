@@ -17,13 +17,24 @@ GLuint OcNode::_bufferId   = -1;
 GLuint OcNode::_bufferSize = 0;
 
 
-OcNode::OcNode(glm::mat4 pMatrix, glm::vec3 pPosition, int pLayer)
-	: _matrix(pMatrix), _position(pPosition), _layer(pLayer)
+OcNode::OcNode(OcNode* pParentNode, glm::vec3 offset)
 {
-	if (_layer != 0)
+	_parent = pParentNode;
+	_positon = offset;
+
+	if (!pParentNode) 
 	{
+		_layer	= 0;
+		_matrix = glm::mat4();
+		_size	= 1;
+	} else {
+		_layer	= _parent->_layer + 1;
+		offset += _parent->_positon;
+		_size	= _parent->_size / 2.0f;
+
+		_matrix	 = _parent->_matrix;
 		_matrix *= glm::scale(glm::vec3(0.5f));
-		_matrix *= glm::translate(pPosition);
+		_matrix *= glm::translate(offset);
 	}
 
 	if (!_shader)
@@ -32,7 +43,7 @@ OcNode::OcNode(glm::mat4 pMatrix, glm::vec3 pPosition, int pLayer)
 	if (_bufferId == -1)
 		initCube();
 
-	if (_layer < 4)
+	if (_layer < _maxLayers)
 		spawnChildren();
 }
 
@@ -44,12 +55,14 @@ void OcNode::spawnChildren()
 		for (int y = 0; y < 2; y++)
 			for (int z = 0; z < 2; z++)
 			{
-				glm::vec3 position = glm::vec3(x, y, z) - glm::vec3(0.5f);
-				_children[count] = new OcNode(_matrix, position, _layer + 1);
+				glm::vec3 offset = glm::vec3(x, y, z) - glm::vec3(0.5f);
+				_children[count] = new OcNode(this, offset);
 				count++;
 			}
 }
 
+#pragma region rendering
+////////////////////////
 void OcNode::render()
 {
 	_shader->use();
@@ -81,11 +94,14 @@ void OcNode::renderSelf(glm::mat4 vpMatrix)
 
 void OcNode::renderChildren(glm::mat4 vpMatrix)
 {
-	if (_layer < 4)
+	if (_layer < _maxLayers)
 		for (int i = 0; i < 8; i++)
 			_children[i]->renderSelf(vpMatrix);
 }
+#pragma endregion
 
+#pragma region initializing
+///////////////////////////
 void OcNode::initShader()
 {
 	std::cout << "initializing octree shader" << std::endl;
@@ -145,6 +161,18 @@ void OcNode::initCube()
 	glBufferData(GL_ARRAY_BUFFER, lines.size() * sizeof(lines), &lines[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+#pragma endregion
+
+#pragma region calculations
+
+bool OcNode::isInside(glm::vec3 pPosition, float pRadius)
+{
+	glm::vec3 nodePos = glm::vec3(_matrix[3]);
+	return true;
+}
+
+#pragma endregion
+
 
 OcNode::~OcNode()
 {

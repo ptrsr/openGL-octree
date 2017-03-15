@@ -11,10 +11,13 @@
 class OcNode
 {
 public:
-	OcNode(glm::mat4 pMatrix = glm::mat4(), glm::vec3 pPosition = glm::vec3(0), int pLayer = 0);
+	OcNode(OcNode* pParentNode, glm::vec3 offset = glm::vec3(0));
 	~OcNode();
 
 	void render();
+
+	//calculations
+	bool isInside(glm::vec3 pPosition, float pRadius);
 
 private:
 	void renderSelf(glm::mat4 vpMatrix);
@@ -37,11 +40,13 @@ private:
 
 	//variables
 	int _layer = 0;
-	
-	glm::mat4 _matrix;
+	int _maxLayers = 2;
 
-	glm::vec3 _position;
+	glm::mat4 _matrix;
+	glm::vec3 _positon;
 	float _size;
+	
+	OcNode* _parent;
 	OcNode* _children[8];
 };
 
