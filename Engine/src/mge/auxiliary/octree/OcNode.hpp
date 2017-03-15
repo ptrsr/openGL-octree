@@ -20,8 +20,8 @@ public:
 	bool isInside(glm::vec3 pPosition, float pRadius);
 
 private:
-	void renderSelf(glm::mat4 vpMatrix);
-	void renderChildren(glm::mat4 vpMatrix);
+	void renderSelf(const glm::mat4& vpMatrix);
+	void renderChildren(const glm::mat4& vpMatrix);
 
 	void spawnChildren();
 
@@ -40,7 +40,7 @@ private:
 
 	//variables
 	int _layer = 0;
-	int _maxLayers = 2;
+	static int _maxLayers;
 
 	glm::mat4 _matrix;
 	glm::vec3 _positon;

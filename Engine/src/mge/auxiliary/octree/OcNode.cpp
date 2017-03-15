@@ -5,6 +5,9 @@
 
 #include <vector>
 
+//maximum layers
+int OcNode::_maxLayers = 4;
+
 //shader
 ShaderProgram* OcNode::_shader = NULL;
 
@@ -19,6 +22,7 @@ GLuint OcNode::_bufferSize = 0;
 
 OcNode::OcNode(OcNode* pParentNode, glm::vec3 offset)
 {
+
 	_parent = pParentNode;
 	_positon = offset;
 
@@ -29,12 +33,13 @@ OcNode::OcNode(OcNode* pParentNode, glm::vec3 offset)
 		_size	= 1;
 	} else {
 		_layer	= _parent->_layer + 1;
-		offset += _parent->_positon;
 		_size	= _parent->_size / 2.0f;
 
 		_matrix	 = _parent->_matrix;
 		_matrix *= glm::scale(glm::vec3(0.5f));
 		_matrix *= glm::translate(offset);
+		
+		offset += _parent->_positon;
 	}
 
 	if (!_shader)
@@ -73,14 +78,14 @@ void OcNode::render()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	Camera* camera = World::getMainCamera();
-	glm::mat4 vpMatrix = camera->getProjection() *glm::inverse(camera->getWorldTransform());
+	glm::mat4 vpMatrix = camera->getProjection() * glm::inverse(camera->getWorldTransform());
 
 	renderSelf(vpMatrix);
 
 	glDisableVertexAttribArray(_aVertex);
 }
 
-void OcNode::renderSelf(glm::mat4 vpMatrix)
+void OcNode::renderSelf(const glm::mat4& vpMatrix)
 {
 	glm::mat4 mvpMatrix = vpMatrix * _matrix;
 
@@ -92,7 +97,7 @@ void OcNode::renderSelf(glm::mat4 vpMatrix)
 	renderChildren(vpMatrix);
 }
 
-void OcNode::renderChildren(glm::mat4 vpMatrix)
+void OcNode::renderChildren(const glm::mat4& vpMatrix)
 {
 	if (_layer < _maxLayers)
 		for (int i = 0; i < 8; i++)
