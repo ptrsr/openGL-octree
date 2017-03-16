@@ -54,7 +54,7 @@ void OctreeScene::_initializeScene()
 	light->rotate(1, glm::vec3(1, 1, 0));
 	_world->add(light);
 
-	spawnBalls(1, 3);
+	spawnBalls(1, 10);
 }
 
 void OctreeScene::spawnBalls(int count, float speed, int seed)

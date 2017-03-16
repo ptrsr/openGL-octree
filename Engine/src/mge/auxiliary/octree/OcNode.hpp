@@ -24,7 +24,6 @@ public:
 
 
 private:
-	//calculations
 	bool isInside(Ball* ball);
 
 	OcNode* getParentNode(Ball* ball);
@@ -34,11 +33,7 @@ private:
 	void addChild(Ball* ball);
 	void removeChild(Ball* ball);
 
-	glm::vec3 _color = glm::vec3(1);
-
-	//rendering
-	void renderSelf(const glm::mat4& vpMatrix);
-	void renderChildren(const glm::mat4& vpMatrix);
+	void renderSelf(const glm::mat4& vpMatrix, glm::vec3 color);
 
 	void spawnChildren();
 
@@ -56,8 +51,11 @@ private:
 	static GLuint _uColor;
 
 	//variables
-	int _layer = 0;
+	static std::vector<OcNode*> emptyNodes;
+	static std::vector<OcNode*> inUseNodes;
+
 	static int _maxLayers;
+	int _layer = 0;
 
 	glm::mat4 _matrix;
 	glm::vec3 _position;

@@ -9,7 +9,11 @@
 #include <algorithm>
 
 //maximum layers
-int OcNode::_maxLayers = 2;
+int OcNode::_maxLayers = 3;
+
+//nodes
+std::vector<OcNode*> OcNode::emptyNodes;
+std::vector<OcNode*> OcNode::inUseNodes;
 
 //shader
 ShaderProgram* OcNode::_shader = NULL;
@@ -25,7 +29,6 @@ GLuint OcNode::_bufferSize = 0;
 
 OcNode::OcNode(OcNode* pParentNode, glm::vec3 offset)
 {
-
 	_parentNode = pParentNode;
 	_position = offset;
 
@@ -36,14 +39,16 @@ OcNode::OcNode(OcNode* pParentNode, glm::vec3 offset)
 		_size	= 1;
 	} else {
 		_layer	= _parentNode->_layer + 1;
-		_size	= _parentNode->_size / 2.0f;
+		_size	= _parentNode->_size / 2;
 
 		_matrix	 = _parentNode->_matrix;
 		_matrix *= glm::scale(glm::vec3(0.5f));
 		_matrix *= glm::translate(offset);
 		
-		offset += _parentNode->_position;
+		_position = glm::vec3(_matrix[3]);
 	}
+
+	emptyNodes.push_back(this);
 
 	if (!_shader)
 		initShader();
@@ -73,26 +78,98 @@ void OcNode::spawnChildren()
 ///////////////////////////////
 void OcNode::updateObject(Ball* ball)
 {
-	OcNode* currentParent = ball->getCurrentNode();
+	OcNode* parent = getParentNode(ball);
+	OcNode* current = ball->getCurrentNode();
+	
+	if (parent == current)
+		return;
 
-	if (currentParent)
+	parent->addChild(ball);
+
+	if (current)
+		current->removeChild(ball);
+
+	ball->setCurrentNode(parent);
+}
+
+OcNode* OcNode::getParentNode(Ball* ball)
+{
+	if (isInside(ball))
 	{
-		if (currentParent->isInside(ball))
-			return;
+		OcNode* potentialParent = searchChildren(ball);
 
-		currentParent->removeChild(ball);
+		if (potentialParent)
+			return potentialParent;
+
+		return this;
 	}
 
-	OcNode* newParent = getParentNode(ball);
-	newParent->addChild(ball);
+	if (_layer == 0)
+		return this;
 
-	ball->setCurrentNode(newParent);
+	_parentNode->searchParent(ball, this);
+}
+
+OcNode* OcNode::searchParent(Ball* ball, OcNode* currentNode)
+{
+	if (_layer == 0)
+		return this;
+
+	if (isInside(ball))
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			OcNode* childNode = _childNodes[i];
+
+			if (childNode == currentNode)
+				continue;
+
+			OcNode* potentialParent = searchChildren(ball);
+
+			if (potentialParent)
+				return potentialParent;
+		}
+		return this;
+	}
+
+	return _parentNode->searchParent(ball, this);
+}
+
+OcNode* OcNode::searchChildren(Ball* ball)
+{
+	OcNode* parent = NULL;
+
+	if (_layer == _maxLayers)
+		return NULL;
+
+	for (int i = 0; i < 8; i++)
+	{
+		OcNode* childNode = _childNodes[i];
+
+		if (childNode->isInside(ball))
+		{
+			parent = childNode;
+			OcNode* potentialParent = childNode->searchChildren(ball);
+
+			if (potentialParent)
+			{
+				parent = potentialParent;
+				break;
+			}
+		}
+	}
+	return parent;
 }
 
 void OcNode::addChild(Ball* ball)
 {
+	if (_childObjects.size() == 0)
+	{
+		inUseNodes.push_back(this);
+		emptyNodes.erase(std::remove(emptyNodes.begin(), emptyNodes.end(), this), emptyNodes.end());
+	}
+
 	_childObjects.push_back(ball);
-	_color = glm::vec3(1, 0, 0);
 }
 
 void OcNode::removeChild(Ball* ball)
@@ -100,7 +177,10 @@ void OcNode::removeChild(Ball* ball)
 	_childObjects.erase(std::remove(_childObjects.begin(), _childObjects.end(), ball), _childObjects.end());
 
 	if (_childObjects.size() == 0)
-		_color = glm::vec3(1);
+	{
+		emptyNodes.push_back(this);
+		inUseNodes.erase(std::remove(inUseNodes.begin(), inUseNodes.end(), this), inUseNodes.end());
+	}
 }
 #pragma endregion
 
@@ -118,29 +198,27 @@ void OcNode::render()
 	Camera* camera = World::getMainCamera();
 	glm::mat4 vpMatrix = camera->getProjection() * glm::inverse(camera->getWorldTransform());
 
-	renderSelf(vpMatrix);
+	for each (OcNode* node in emptyNodes)
+		node->renderSelf(vpMatrix, glm::vec3(1, 1, 1));
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	for each (OcNode* node in inUseNodes)
+		node->renderSelf(vpMatrix, glm::vec3(1, 0, 0));
 
 	glDisableVertexAttribArray(_aVertex);
 }
 
-void OcNode::renderSelf(const glm::mat4& vpMatrix)
+void OcNode::renderSelf(const glm::mat4& vpMatrix, glm::vec3 color)
 {
 	glm::mat4 mvpMatrix = vpMatrix * _matrix;
 
 	glUniformMatrix4fv(_uMVP, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-	glUniform3fv(_uColor, 1, glm::value_ptr(_color));
+	glUniform3fv(_uColor, 1, glm::value_ptr(color));
 
 	glDrawArrays(GL_LINES, 0, _bufferSize);
-
-	renderChildren(vpMatrix);
 }
 
-void OcNode::renderChildren(const glm::mat4& vpMatrix)
-{
-	if (_layer < _maxLayers)
-		for (int i = 0; i < 8; i++)
-			_childNodes[i]->renderSelf(vpMatrix);
-}
 #pragma endregion
 
 #pragma region initializing
@@ -245,86 +323,19 @@ void OcNode::resolveCollision(Ball* ball)
 
 }
 
-OcNode* OcNode::getParentNode(Ball* ball)
-{
-	if (isInside(ball))
-	{
-		OcNode* potentialParent = searchChildren(ball);
-
-		if (potentialParent)
-			return potentialParent;
-		
-		return this;
-	}
-
-	if (_layer == 0)
-		return this;
-
-	_parentNode->searchParent(ball, this);
-}
-
-OcNode* OcNode::searchParent(Ball* ball, OcNode* currentNode)
-{
-	if (isInside(ball))
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			OcNode* childNode = _childNodes[i];
-
-			if (childNode == currentNode)
-				continue;
-
-			OcNode* potentialParent = searchChildren(ball);
-
-			if (potentialParent)
-				return potentialParent;
-		}
-
-		return this;
-	}
-
-	return _parentNode->searchParent(ball, this);
-}
-
-OcNode* OcNode::searchChildren(Ball* ball)
-{
-	OcNode* parent = NULL;
-
-	if (_layer + 1 == _maxLayers)
-		return NULL;
-
-	for (int i = 0; i < 8; i++)
-	{
-		OcNode* childNode = _childNodes[i];
-		
-		if (childNode->isInside(ball))
-		{
-			parent = childNode;
-			OcNode* potentialParent = childNode->searchChildren(ball);
-
-			if (potentialParent)
-			{
-				parent = potentialParent;
-				break;
-			}
-		}
-	}
-	return parent;
-}
-
 bool OcNode::isInside(Ball* ball)
 {
 	float size = _size / 2;
 
-	float radius = ball->getRadius();
-	glm::vec3 pos = ball->getLocalPosition();
+	float ballRadius  = ball->getRadius();
+	glm::vec3 ballPos = ball->getLocalPosition();
 
-	glm::vec3 min = _position - size + glm::vec3(radius);
-	glm::vec3 max = _position + size - glm::vec3(radius);
+	glm::vec3 min = _position - size + glm::vec3(ballRadius);
+	glm::vec3 max = _position + size - glm::vec3(ballRadius);
 
-	if (min.x <= pos.x && pos.x <= max.x &&
-		min.y <= pos.y && pos.y <= max.y &&
-		min.z <= pos.z && pos.z <= max.z)
+	if (min.x <= ballPos.x && ballPos.x <= max.x &&
+		min.y <= ballPos.y && ballPos.y <= max.y &&
+		min.z <= ballPos.z && ballPos.z <= max.z)
 		return true;
 
 	return false;

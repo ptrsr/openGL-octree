@@ -1,10 +1,12 @@
 #include "Ball.hpp"
 
 Ball::Ball(OcNode* pStartNode, glm::vec3 pPosition, glm::vec3 pDirection)
-	: _startNode(pStartNode), _currentNode(pStartNode), _direction(pDirection), GameObject("ball")
+	: _startNode(pStartNode), _direction(pDirection), GameObject("ball")
 {
 	setLocalPosition(pPosition);
-	setRadius(0.05f);
+	setRadius(0.02f);
+
+	_startNode->updateObject(this);
 }
 
 void Ball::update(float pStep)
