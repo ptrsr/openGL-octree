@@ -6,5 +6,5 @@ uniform vec3 color;
 out vec4 fColor;
 
 void main( void ) {
-	fColor = vec4 (1, 1, 1, 1);
+	fColor = vec4 (color, 1);
 }

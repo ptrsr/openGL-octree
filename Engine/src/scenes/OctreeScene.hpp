@@ -4,6 +4,8 @@
 #include <mge/core/AbstractGame.hpp>
 #include "mge/auxiliary/octree/OcNode.hpp"
 
+#include "mge/core/GameObject.hpp"
+
 class DebugHud;
 
 class OctreeScene: public AbstractGame
@@ -24,10 +26,12 @@ class OctreeScene: public AbstractGame
 
 	private:
 		DebugHud* _hud;                   //hud display
+		OcNode* _ocNode = NULL;
 
-		OcNode* _ocNode;
+		vector<GameObject*> balls;
 
         void _updateHud();
+		void spawnBalls(int count, float speed, int seed = 0);
 
         OctreeScene(const OctreeScene&);
         OctreeScene& operator=(const OctreeScene&);

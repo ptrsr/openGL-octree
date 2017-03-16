@@ -62,7 +62,7 @@ vec3 CalcSpotLight(SpotLight, vec3, vec3);
 
 void main( void ) 
 {
-	vec3 wNormal = vec3 (modelMatrix * vec4(fNormal, 0));
+	vec3 wNormal = normalize(vec3 (modelMatrix * vec4(fNormal, 0)));
 	vec3 viewDir = normalize(cameraPos -  fPos);
 	vec3 color;
 	
@@ -87,8 +87,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	
 	vec3 ambient  = light.ambient * modelColor;
 	vec3 diffuse  = light.diffuse * diff * modelColor;
-	vec3 specular = light.specular * spec * modelColor;
-	
+	//vec3 specular = light.specular * spec * modelColor;
+	vec3 specular = vec3(0);	
+
 	return (ambient + diffuse + specular);
 }
 
