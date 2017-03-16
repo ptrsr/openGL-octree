@@ -9,7 +9,7 @@
 #include <algorithm>
 
 //maximum layers
-int OcNode::_maxLayers = 3;
+int OcNode::_maxLayers = 2;
 
 //nodes
 std::vector<OcNode*> OcNode::emptyNodes;
@@ -107,7 +107,7 @@ OcNode* OcNode::getParentNode(Ball* ball)
 	if (_layer == 0)
 		return this;
 
-	_parentNode->searchParent(ball, this);
+	return _parentNode->searchParent(ball, this);
 }
 
 OcNode* OcNode::searchParent(Ball* ball, OcNode* currentNode)
@@ -137,10 +137,10 @@ OcNode* OcNode::searchParent(Ball* ball, OcNode* currentNode)
 
 OcNode* OcNode::searchChildren(Ball* ball)
 {
-	OcNode* parent = NULL;
-
 	if (_layer == _maxLayers)
 		return NULL;
+
+	OcNode* parent = NULL;
 
 	for (int i = 0; i < 8; i++)
 	{

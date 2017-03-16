@@ -68,7 +68,7 @@ void OctreeScene::spawnBalls(int count, float speed, int seed)
 		Ball* ball = new Ball(_ocNode, glm::vec3(0), glm::ballRand(speed));
 
 		ball->setMesh(mesh);
-		ball->setMaterial(new LitMaterial());
+		ball->setMaterial(new LitMaterial(glm::vec3(0, 1, 0)));
 
 		_world->add(ball);
 		balls.push_back(ball);
